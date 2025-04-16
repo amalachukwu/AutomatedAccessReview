@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Access Review Reports</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            .reports { display: flex; flex-wrap: wrap; }
+            .report { border: 1px solid #ddd; padding: 15px; margin: 10px; border-radius: 5px; width: 300px; }
+            h3 { margin-top: 0; }
+            nav { margin-bottom: 20px; }
+            nav a { margin-right: 15px; }
+            ul { padding-left: 20px; }
+        </style>
+    </head>
+    <body>
+        <h1>Access Review Reports</h1>
+        <nav>
+            <a href="/">Dashboard</a>
+            <a href="/reports">Reports</a>
+        </nav>
+        
+        <div class="reports">
+            <div class="report">
+                <h3>Review Status Summary</h3>
+                <ul>
+                    {% for status, count in status_summary.items() %}
+                        <li>{{ status }}: {{ count }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <div class="report">
+                <h3>Risk Level Distribution</h3>
+                <ul>
+                    {% for risk, count in risk_summary.items() %}
+                        <li>{{ risk }}: {{ count }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <div class="report">
+                <h3>System Access Distribution</h3>
+                <ul>
+                    {% for system, count in system_summary.items() %}
+                        <li>{{ system }}: {{ count }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </body>
+    </html>
+    

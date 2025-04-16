@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Access Review Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .dashboard { display: flex; flex-wrap: wrap; }
+        .metric { border: 1px solid #ddd; padding: 15px; margin: 10px; border-radius: 5px; width: 200px; }
+        .high { background-color: #ffebee; }
+        nav { margin-bottom: 20px; }
+        nav a { margin-right: 15px; }
+    </style>
+</head>
+<body>
+    <h1>Access Review Dashboard</h1>
+    <nav>
+        <a href="/">Dashboard</a>
+        <a href="/reports">Reports</a>
+    </nav>
+    <div class="dashboard">
+        <div class="metric">
+            <h3>Total Access Rights</h3>
+            <p>{{ total_access }}</p>
+        </div>
+        <div class="metric high">
+            <h3>High Risk Access</h3>
+            <p>{{ high_risk }}</p>
+        </div>
+        <div class="metric">
+            <h3>Pending Reviews</h3>
+            <p>{{ pending_reviews }}</p>
+        </div>
+        <div class="metric high">
+            <h3>Overdue Reviews</h3>
+            <p>{{ overdue }}</p>
+        </div>
+    </div>
+    
+    <h2>Reviewer Links (Demo)</h2>
+    <ul>
+        <li><a href="/review/M001">Alex Manager's Reviews</a></li>
+        <li><a href="/review/M002">Rachel Director's Reviews</a></li>
+        <li><a href="/review/M003">David Leader's Reviews</a></li>
+    </ul>
+</body>
+</html>

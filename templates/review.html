@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Access Review Certification</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            table { border-collapse: collapse; width: 100%; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            th { background-color: #f2f2f2; }
+            tr:nth-child(even) { background-color: #f9f9f9; }
+            .high { background-color: #ffebee; }
+            .medium { background-color: #fff8e1; }
+            .actions { display: flex; gap: 10px; }
+            .approve { background-color: #e8f5e9; }
+            .revoke { background-color: #ffebee; }
+            form { margin-bottom: 20px; }
+        </style>
+    </head>
+    <body>
+        <h1>Access Certification for {{ reviewer_name }}</h1>
+        <a href="/">Back to Dashboard</a>
+        
+        <h2>Pending Access Reviews</h2>
+        <table>
+            <tr>
+                <th>User</th>
+                <th>Department</th>
+                <th>System</th>
+                <th>Access Level</th>
+                <th>Risk</th>
+                <th>Granted</th>
+                <th>Actions</th>
+            </tr>
+            {% for item in items %}
+                <tr class="{{ item.risk_level.lower() if item.review_status == 'Pending' }}">
+                    <td>{{ item.user_name }}</td>
+                    <td>{{ item.department }}</td>
+                    <td>{{ item.system_name }}</td>
+                    <td>{{ item.access_level }}</td>
+                    <td>{{ item.risk_level }}</td>
+                    <td>{{ item.date_granted.strftime('%Y-%m-%d') }}</td>
+                    <td>
+                        {% if item.review_status == 'Pending' %}
+                            <form action="/certify" method="post">
+                                <input type="hidden" name="access_id" value="{{ item.access_id }}">
+                                <input type="hidden" name="reviewer_id" value="{{ reviewer_id }}">
+                                <div class="actions">
+                                    <button type="submit" name="decision" value="Approved" class="approve">Approve</button>
+                                    <button type="submit" name="decision" value="Revoked" class="revoke">Revoke</button>
+                                </div>
+                                <input type="text" name="comments" placeholder="Add comments (optional)">
+                            </form>
+                        {% else %}
+                            Status: {{ item.review_status }}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </body>
+    </html>
+    
